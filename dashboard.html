@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - VizinApp Maricá</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h2>VizinApp</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="saiba-mais.html">Saiba Mais</a></li>
+                <li><a href="dashboard.html" class="btn-primary">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="dashboard-container">
+            <!-- Seção de Login/Cadastro -->
+            <div id="loginSection" class="login-section">
+                <h2>Acesse sua Conta</h2>
+                
+                <!-- 🔥 LOGIN DE DEMONSTRAÇÃO -->
+                <div class="demo-login" style="background: #e8f5e8; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #28a745;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #155724;">🔐 Login de Demonstração</h4>
+                    <p style="margin: 0.25rem 0; font-size: 0.9rem;"><strong>Login:</strong> admin@marica.gov.br</p>
+                    <p style="margin: 0.25rem 0; font-size: 0.9rem;"><strong>Senha:</strong> 12345</p>
+                    <button type="button" id="demoLogin" class="btn-primary" style="margin-top: 0.5rem; background: #28a745;">
+                        🚀 Usar Login de Demonstração
+                    </button>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </form>
+                
+                <div style="margin-top: 1rem; text-align: center;">
+                    <p>Não tem conta? <a href="#" id="showRegister">Cadastre-se</a></p>
+                </div>
+            </div>
+
+            <!-- Seção de Cadastro -->
+            <div id="registerSection" class="login-section hidden">
+                <h2>Crie sua Conta</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="regNome">Nome Completo:</label>
+                        <input type="text" id="regNome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">E-mail:</label>
+                        <input type="email" id="regEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regCpf">CPF:</label>
+                        <input type="text" id="regCpf" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEndereco">Endereço:</label>
+                        <input type="text" id="regEndereco" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Senha:</label>
+                        <input type="password" id="regPassword" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Cadastrar</button>
+                </form>
+                
+                <div style="margin-top: 1rem; text-align: center;">
+                    <p>Já tem conta? <a href="#" id="showLogin">Fazer Login</a></p>
+                </div>
+            </div>
+
+            <!-- Dashboard Principal (após login) -->
+            <div id="dashboardMain" class="hidden">
+                <div class="dashboard-header">
+                    <h1>Bem-vindo ao VizinApp, <span id="userName"></span>!</h1>
+                    <p>Acompanhe e registre suas solicitações</p>
+                    
+                    <!-- 🔥 INDICADOR DE CONTA DEMO -->
+                    <div id="demoIndicator" class="hidden" style="background: #fff3cd; padding: 0.5rem; border-radius: 5px; margin: 1rem 0; border: 1px solid #ffeaa7;">
+                        <p style="margin: 0; color: #856404;">👆 <strong>Conta de Demonstração</strong> - Dados simulados para teste</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Perfil do Usuário -->
+                    <div class="login-section">
+                        <h3>Seus Dados</h3>
+                        <div id="userProfile">
+                            <p><strong>Nome:</strong> <span id="profileNome"></span></p>
+                            <p><strong>E-mail:</strong> <span id="profileEmail"></span></p>
+                            <p><strong>CPF:</strong> <span id="profileCpf"></span></p>
+                            <p><strong>Endereço:</strong> <span id="profileEndereco"></span></p>
+                        </div>
+                        <button id="logoutBtn" class="btn-secondary" style="margin-top: 1rem;">Sair</button>
+                    </div>
+
+                    <!-- Solicitações -->
+                    <div class="solicitacoes-section">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                            <h3>Suas Solicitações</h3>
+                            <button id="novaSolicitacaoBtn" class="btn-primary">Nova Solicitação</button>
+                        </div>
+
+                        <div id="solicitacoesList">
+                            <!-- Solicitações serão carregadas aqui -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Nova Solicitação -->
+            <div id="novaSolicitacaoModal" class="login-section hidden">
+                <h3>Nova Solicitação</h3>
+                <form id="novaSolicitacaoForm">
+                    <div class="form-group">
+                        <label for="secretaria">Secretaria:</label>
+                        <select id="secretaria" required>
+                            <option value="">Selecione uma secretaria</option>
+                            <option value="Saúde">🏥 Saúde</option>
+                            <option value="Educação">📚 Educação</option>
+                            <option value="Saneamento">🌊 Saneamento</option>
+                            <option value="Infraestrutura">🛣️ Infraestrutura</option>
+                            <option value="Transporte">🚌 Transporte</option>
+                            <option value="Limpeza Urbana">🧹 Limpeza Urbana</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="titulo">Título da Solicitação:</label>
+                        <input type="text" id="titulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição Detalhada:</label>
+                        <textarea id="descricao" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="anexos">Anexos (opcional):</label>
+                        <input type="file" id="anexos" multiple>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="submit" class="btn-primary">Enviar Solicitação</button>
+                        <button type="button" id="cancelarSolicitacao" class="btn-secondary">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 VizinApp - Prefeitura Municipal de Maricá. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="data/database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
