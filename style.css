@@ -8,8 +8,8 @@
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    color: #FFFF00;
-    background-color: #f8f9fa;
+    color: #333;
+    background-color: #FFFF00;
 }
 
 .container {
@@ -344,3 +344,4 @@ footer {
     margin-bottom: 1rem;
 
 }
+
